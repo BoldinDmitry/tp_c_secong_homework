@@ -7,19 +7,12 @@ before_install:
 before_script:
   - pip3 install --user cpplint
 
-compiler:
-  - gcc
-  - clang
+compiler: clang
 
 script:
   - cpplint main.c
   - cppcheck main.c
-  - gcc -std=c11 -Wall -Wpedantic -c -fPIC libdynamic.c
-  - gcc -shared -o libdynamic.so libdynamic.o
-  - gcc -std=c11 -Wall -Wpedantic --coverage -c *.c
-  - gcc -o zadanie_2_multithread_proga *.o -fprofile-arcs -ftest-coverage -g -L. -ldynamic -lstatic -Wl,-rpath,.
-  - ./tp_hw_2
-  - gcov *.c
+  - gcc -g -Wall -Wextra main.c -o main
   - mkdir build
   - cd build
   - cmake ..
