@@ -12,7 +12,7 @@ compiler: clang
 script:
   - cpplint main.c
   - cppcheck main.c
-  - valgrind --leak-check=full --show-leak-kinds=all main.c ; fi
+  - valgrind --leak-check=full --show-leak-kinds=all main.c
   - gcc -g -Wall -Wextra main.c -o main
   - mkdir build
   - cd build
