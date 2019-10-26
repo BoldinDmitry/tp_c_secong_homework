@@ -12,6 +12,9 @@ compiler: clang
 script:
   - cpplint *.c
   - cppcheck *.c
+  - gcc -c static_lib.c
+  - ar r static_lib.a *.o
+  - rm *.o
   - gcc -g -Wall -Wextra main.c -o main
   - mkdir build
   - cd build
