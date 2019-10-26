@@ -4,11 +4,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <unistd.h>
 #include <sys/wait.h>
 #include <time.h>
-
+#include "static_lib.h"
 
 const int* generate_array(int d) {
     int* arr = malloc(sizeof(int)*d);
