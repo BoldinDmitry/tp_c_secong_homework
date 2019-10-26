@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <time.h>
-#include "static_lib.h"
+#include "static_lib.h" //NOLINT
 
 const int* generate_array(int d) {
     int* arr = malloc(sizeof(int)*d);
