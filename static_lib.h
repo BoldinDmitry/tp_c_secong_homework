@@ -5,7 +5,7 @@
 #ifndef TP_HW_2_STATIC_LIB_H
 #define TP_HW_2_STATIC_LIB_H
 
-#include "dynamic_lib.c"
+#include "static_lib.h.c"
 
 const int* generate_array(int d);
 int get_highest_diff(const int *arr, int start, int end);
