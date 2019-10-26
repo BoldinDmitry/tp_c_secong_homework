@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <time.h>
+#include "assert.h"
 
 const int* generate_array(int d) {
     int* arr = malloc(sizeof(int)*d);
@@ -86,7 +87,7 @@ int get_highest_diff_mp(const int* temperatures, int n) {
     //    Проверяем стыки
     for (int k = 1; k < processes_count - 1; ++k) {
         int tmp = temperatures[k * chang_size] -
-                temperatures[(k + 1) * chang_size];
+                  temperatures[(k + 1) * chang_size];
         if (tmp > max_diff) {
             max_diff = tmp;
             index = (k+1)*chang_size;
@@ -95,32 +96,35 @@ int get_highest_diff_mp(const int* temperatures, int n) {
     return index;
 }
 
-
-
-int main() {
-    srand(time(NULL));
+void test_solution() {
     // count of ints, that will be
     const int d = 2147483647;
     const int* arr;
     arr = generate_array(d);
-
     struct timespec start, finish;
-    double elapsed;
+    double elapsed_mp, elapsed_single;
 
     clock_gettime(CLOCK_MONOTONIC, &start);
     int max_i = get_highest_diff(arr, 0, d);
     clock_gettime(CLOCK_MONOTONIC, &finish);
-    elapsed = finish.tv_sec - start.tv_sec;
-    elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;;
-    printf("Single thread %d %f\n", max_i, elapsed);
+    elapsed_single = finish.tv_sec - start.tv_sec;
+    elapsed_single += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;;
 
     clock_gettime(CLOCK_MONOTONIC, &start);
     int max_mt = get_highest_diff_mp(arr, d);
     clock_gettime(CLOCK_MONOTONIC, &finish);
-    elapsed = finish.tv_sec - start.tv_sec;
-    elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-    printf("Multithreading: %d %f\n", max_mt, elapsed);
+    elapsed_mp = finish.tv_sec - start.tv_sec;
+    elapsed_mp += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
 
-    free(arr);
+    assert(max_i == max_mt);
+    assert(elapsed_single > elapsed_mp);
+}
+
+
+int main() {
+    srand(time(NULL));
+
+    test_solution();
+
     return 0;
 }

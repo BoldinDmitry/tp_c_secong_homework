@@ -10,8 +10,8 @@ before_script:
 compiler: clang
 
 script:
-  - cpplint main.c
-  - cppcheck main.c
+  - cpplint *.c
+  - cppcheck *.c
   - gcc -g -Wall -Wextra main.c -o main
   - mkdir build
   - cd build
