@@ -3,9 +3,9 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include "dynamic_lib.h"
 #include <unistd.h>
 #include <sys/wait.h>
+#include "dynamic_lib.h"  //NOLINT
 
 
 const int* generate_array(int d) {

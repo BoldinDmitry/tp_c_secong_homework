@@ -10,7 +10,7 @@
 #include <sys/wait.h>
 #include <time.h>
 #include <assert.h>
-#include "static_lib.h"
+#include "static_lib.h"  //NOLINT
 
 void test_solution() {
     // count of ints, that will be
